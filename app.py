@@ -50,7 +50,7 @@ st.header('Top Movies for YOU')
 st.write('Movies can be sorted by minimun_rating or minimun_reviews.')
 
 
-con3, con1, con2 = st.container([.1,.5,1])
+con3, con1, con2 = st.container()
 with con3:
     st.write('.\n')
     top_number_of_movies_recommended = st.slider("top_number_of_movies:", 10)
