@@ -26,15 +26,15 @@ def recommendation_popularity(ratings_df,movies_df,minimun_rating,minimun_review
 ## 2) Method: **`Correlation`**: using MOVIES correlation
 
 
-def recommendation_byMoviesCorrelation(ratings_df, movies_df, movieId, Correlation_Method, minimun_reviews, minimun_rating, top_number_of_movies_recommended):
+def recommendation_byMoviesCorrelation(ratings_df, movies_df, movieId, correlation_method, minimun_reviews, minimun_rating, top_number_of_movies_recommended):
   import pandas as pd
   movies_ratings_df = ratings_df.loc[ratings_df['rating'] >= minimun_rating]
   movies_crosstab = pd.pivot_table(data=movies_ratings_df, values='rating', index='userId', columns='movieId')
   cross_ratings = movies_crosstab[movieId]
 
-  similar_ratings = movies_crosstab.corrwith(cross_ratings,method=Correlation_Method)
+  similar_ratings = movies_crosstab.corrwith(cross_ratings,method=correlation_method)
 
-  corr_df = pd.DataFrame(similar_ratings, columns=[f'Correlation_{Correlation_Method}'])
+  corr_df = pd.DataFrame(similar_ratings, columns=[f'Correlation_{correlation_method}'])
   corr_df.dropna(inplace=True)
 
   rating = pd.DataFrame(movies_ratings_df.groupby('movieId')['rating'].mean())
@@ -44,7 +44,7 @@ def recommendation_byMoviesCorrelation(ratings_df, movies_df, movieId, Correlati
   movies_corr_summary = corr_df.join(rating['reviews'])
   movies_corr_summary.drop(movieId, inplace=True) # drop the inputed movie itself
 
-  top = movies_corr_summary[movies_corr_summary['reviews']>=minimun_reviews].sort_values(f'Correlation_{Correlation_Method}', ascending=False).head(top_number_of_movies_recommended)
+  top = movies_corr_summary[movies_corr_summary['reviews']>=minimun_reviews].sort_values(f'Correlation_{correlation_method}', ascending=False).head(top_number_of_movies_recommended)
 
   top_movies_names_df= pd.merge(top, movies_df, on='movieId', how='inner')
 
