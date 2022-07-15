@@ -21,7 +21,8 @@ def recommendation_popularity(ratings_df,movies_df,minimun_rating,minimun_review
   recommended_movies = pd.DataFrame(top_movies_names_df['title'])
   recommended_movies.columns = ['Recommended_Movies']
   recommended_movies.set_index('Recommended_Movies', inplace=True)
-  return recommended_movies
+#  return recommended_movies
+  return top_movies_names_df
 
 ## 2) Method: **`Correlation`**: using MOVIES correlation
 
@@ -60,7 +61,8 @@ def recommendation_byMoviesCorrelation(ratings_df, movies_df, movieId, correlati
   recommended_movies = pd.DataFrame(top_movies_names_df['title'])
   recommended_movies.columns = ['Recommended_Movies']
   recommended_movies.set_index('Recommended_Movies', inplace=True)
-  return recommended_movies
+#  return recommended_movies
+  return selected_movie_name
 
 ## 3) Method: **`Cosine Similarities`**: using USERS similarity
 
@@ -109,4 +111,5 @@ def recommendation_byUsersSimilarity (ratings_df, movies_df, user_id,top_number_
   recommended_movies = pd.DataFrame(top_movies_names_df['title'])
   recommended_movies.columns = ['Recommended_Movies']
   recommended_movies.set_index('Recommended_Movies', inplace=True)
-  return recommended_movies
+#  return recommended_movies
+  return top_movies_names_df
