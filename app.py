@@ -70,5 +70,5 @@ with container_01:
             user_id = st.slider("user_id", value=200)
 #            users_final_df = rf.recommendation_byUsersSimilarity (ratings_df, movies_df, user_id,top_number_of_movies_recommended)
             st.table(rf.recommendation_byUsersSimilarity (ratings_df, movies_df, user_id,top_number_of_movies_recommended))
-
-st.form_submit_button('Show')
+        
+        st.form_submit_button('Show')
