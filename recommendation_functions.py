@@ -2,8 +2,8 @@
 ## 1) Popularity/Quality based recommmender system:
 
 
-def recommendation_popularity(minimun_rating,minimun_reviews,top_number_of_movies_recommended):
-    
+def recommendation_popularity(ratings_df,movies_df,minimun_rating,minimun_reviews,top_number_of_movies_recommended):
+  import pandas as pd  
   rating_movieId_mean = pd.DataFrame(ratings_df.groupby('movieId')['rating'].mean()).sort_values("rating", ascending=False)
   rating_movieId_mean = rating_movieId_mean[rating_movieId_mean['rating'] >= minimun_rating]
 
@@ -26,7 +26,8 @@ def recommendation_popularity(minimun_rating,minimun_reviews,top_number_of_movie
 ## 2) Method: **`Correlation`**: using MOVIES correlation
 
 
-def recommendation_byMoviesCorrelation(movieId, Correlation_Method, minimun_reviews, minimun_rating, top_number_of_movies_recommended):
+def recommendation_byMoviesCorrelation(ratings_df, movies_df, movieId, Correlation_Method, minimun_reviews, minimun_rating, top_number_of_movies_recommended):
+  import pandas as pd
   movies_ratings_df = ratings_df.loc[ratings_df['rating'] >= minimun_rating]
   movies_crosstab = pd.pivot_table(data=movies_ratings_df, values='rating', index='userId', columns='movieId')
   cross_ratings = movies_crosstab[movieId]
@@ -64,8 +65,8 @@ def recommendation_byMoviesCorrelation(movieId, Correlation_Method, minimun_revi
 ## 3) Method: **`Cosine Similarities`**: using USERS similarity
 
 
-def recommendation_byUsersSimilarity (user_id,top_number_of_movies_recommended):
-
+def recommendation_byUsersSimilarity (ratings_df, movies_df, user_id,top_number_of_movies_recommended):
+  import pandas as pd
   movies =  movies_df[['movieId', 'title']]
 
   # Create a Pivot DataFrame, where the values are the rating values and the rows= userId  & columns= movieId
