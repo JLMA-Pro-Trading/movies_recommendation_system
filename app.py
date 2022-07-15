@@ -52,7 +52,7 @@ container_01 = st.container()
 
 with container_01:
     with st.form('top number of movies'):
-        col3, col1, col2 = st.container([.1,.5,1])
+        col3, col1, col2 = st.columns([.1,.5,1])
         with col3:
             st.write('.\n')
             top_number_of_movies_recommended = st.slider("top_number_of_movies:", 10)
